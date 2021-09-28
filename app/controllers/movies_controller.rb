@@ -48,6 +48,7 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
+    return @movies
   end
 
   private
