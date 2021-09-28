@@ -38,6 +38,17 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  # Elba - make a sorting algorithm here, need to get sorting mode somehow
+  def sort mode
+    if mode == "title"
+      @movies = Movie.all.sort_by(&:title)
+    elseif mode == "release"
+      @movies = Movie.all.sort_by(&:release_date)
+    else
+      @movies = Movie.all
+    end
+  end
+
   private
   # Making "internal" methods private is not required, but is a common practice.
   # This helps make clear which methods respond to requests, and which ones do not.
