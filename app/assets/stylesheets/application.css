@@ -16,4 +16,6 @@
 
 /* Need hilite class for Hw2: Part 1 */
 .hilite {
+  background-color: #FFBB33;
+  color: #000000;
 }
