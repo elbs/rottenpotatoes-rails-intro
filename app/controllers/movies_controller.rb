@@ -41,9 +41,9 @@ class MoviesController < ApplicationController
 
   # Elba - make a sorting algorithm here, need to get sorting mode somehow
   def msort mode
-    if mode == "title"
+    if mode == 'title'
       sorted = Movie.all.sort_by(&:title)
-    elseif mode == "release"
+    elsif mode == 'release'
       sorted = Movie.all.sort_by(&:release_date)
     else
       sorted = Movie.all
