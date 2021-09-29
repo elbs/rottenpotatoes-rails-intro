@@ -14,10 +14,11 @@ class MoviesController < ApplicationController
     @which_ratings = params[:ratings]
     if which_ratings.empty?
       selected_movies = Movie.all
-    else
-      selected_movies = grab_rated_movies(@which_ratings)
+    #else
+    #  selected_movies = grab_rated_movies(@which_ratings)
     @movies = msort(selected_movies)
   end
+
 
   def new
     # default: render 'new' template
