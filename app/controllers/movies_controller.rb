@@ -7,8 +7,17 @@ class MoviesController < ApplicationController
   end
 
   def index
-    how_show = params[:mode]
-    @movies,@modhl = msort(how_show)
+    # "it expects the variable @all_ratings to be an enumerable collection
+    @all_ratings = ['G', 'PG', 'PG-13', 'R']
+
+    @modhl = params[:mode]
+    which_ratings = params[:ratings]
+    #if which_ratings.empty?
+    #  picked = show_rated(which_ratings) 
+      selected_movies = Movie.all
+
+
+    @movies = msort(selected_movies)
   end
 
   def new
@@ -41,16 +50,15 @@ class MoviesController < ApplicationController
 
   # Elba - make a sorting algorithm here
   # Returns sorted list of movies and also which th cell to highlight
-  def msort mode
-    if mode == 'title'
-      sorted = Movie.all.sort_by(&:title)
-    elsif mode == 'release'
-      sorted = Movie.all.sort_by(&:release_date)
+  def msort chosen_movies
+    if @modhl == 'title'
+      sorted = chosen_movies.all.sort_by(&:title)
+    elsif @modhl == 'release'
+      sorted = chosen_movies.all.sort_by(&:release_date)
     else
-      sorted = Movie.all
-      mode = nil
+      sorted = chosen_movies.all
     end
-    return sorted,mode
+    return sorted
   end
 
   private
