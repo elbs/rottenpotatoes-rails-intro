@@ -11,11 +11,17 @@ class MoviesController < ApplicationController
     @all_ratings = ['G', 'PG', 'PG-13', 'R']
 
     @modhl = params[:mode]
-    @which_ratings = params[:ratings]
-    if @which_ratings.empty?
-      selected_movies = Movie.all
-    #else
-    #  selected_movies = grab_rated_movies(@which_ratings)
+    which_ratings = params[:ratings]
+
+    # Make it all-inclusive for now 
+    selected_movies = Movie.all
+    @selected_ratings = @all_ratings
+
+    # Then reduce based on selections
+    if which_ratings.any?
+      selected_movies = grab_rated_movies(which_ratings)
+      @selected_ratings = which_ratings 
+    end
     @movies = msort(selected_movies)
   end
 

@@ -6,7 +6,7 @@
   Include:
   <% - @all_ratings.each do |rating| %>
       <%= rating %>
-      <%= check_box_tag "ratings[#{rating}]", rating, @selected_movies.include?(rating) %>
+      <%= check_box_tag "ratings[#{rating}]", rating, @selected_ratings.include?(rating) %>
     <% end %>
   <%= submit_tag 'Refresh', :id => 'ratings_submit', :class => 'btn btn-primary' %>
 <% end %>
