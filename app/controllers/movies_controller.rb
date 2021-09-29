@@ -11,12 +11,11 @@ class MoviesController < ApplicationController
     @all_ratings = ['G', 'PG', 'PG-13', 'R']
 
     @modhl = params[:mode]
-    which_ratings = params[:ratings]
-    #if which_ratings.empty?
-    #  picked = show_rated(which_ratings) 
+    @which_ratings = params[:ratings]
+    if which_ratings.empty?
       selected_movies = Movie.all
-
-
+    else
+      selected_movies = grab_rated_movies(@which_ratings)
     @movies = msort(selected_movies)
   end
 
