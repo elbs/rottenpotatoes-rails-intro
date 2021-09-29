@@ -6,9 +6,9 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th id="title_header"><a class="<%= @modhl == 'title' ? 'hilite' : %>" href="/?mode=title">Movie Title</a></th>
+      <th id="title_header"><a class="<%= @modhl == 'title' ? 'hilite' : 'text-warning' %>" href="/?mode=title">Movie Title</a></th>
       <th>Rating</th>
-      <th id="release_date_header"><a class=" <%= @modhol == 'release' ? 'hilite' : %>" href="/?mode=release">Release Date</a></th>
+      <th id="release_date_header"><a class=" <%= @modhl == 'release' ? 'hilite' : 'text-warning' %>" href="/?mode=release">Release Date</a></th>
       <th>More Info</th>
     </tr>
   </thead>
