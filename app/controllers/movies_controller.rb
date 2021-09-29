@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
 
     # Then reduce based on selections
     if which_ratings.any?
-      selected_movies = grab_rated_movies(which_ratings)
+      #selected_movies = grab_rated_movies(which_ratings)
       @selected_ratings = which_ratings 
     end
     @movies = msort(selected_movies)
@@ -58,11 +58,11 @@ class MoviesController < ApplicationController
   # Returns sorted list of movies and also which th cell to highlight
   def msort chosen_movies
     if @modhl == 'title'
-      sorted = chosen_movies.all.sort_by(&:title)
+      sorted = chosen_movies.sort_by(&:title)
     elsif @modhl == 'release'
-      sorted = chosen_movies.all.sort_by(&:release_date)
+      sorted = chosen_movies.sort_by(&:release_date)
     else
-      sorted = chosen_movies.all
+      sorted = chosen_movies
     end
     return sorted
   end
