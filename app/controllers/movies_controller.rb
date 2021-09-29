@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
 
   def index
     how_show = params[:mode]
-    @movies = msort(how_show)
+    @movies,@modhl = msort(how_show)
   end
 
   def new
@@ -39,7 +39,8 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
-  # Elba - make a sorting algorithm here, need to get sorting mode somehow
+  # Elba - make a sorting algorithm here
+  # Returns sorted list of movies and also which th cell to highlight
   def msort mode
     if mode == 'title'
       sorted = Movie.all.sort_by(&:title)
@@ -47,8 +48,9 @@ class MoviesController < ApplicationController
       sorted = Movie.all.sort_by(&:release_date)
     else
       sorted = Movie.all
+      mode = nil
     end
-    return sorted
+    return sorted,mode
   end
 
   private
