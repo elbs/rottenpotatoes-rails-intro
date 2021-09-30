@@ -30,9 +30,10 @@ class MoviesController < ApplicationController
     if which_ratings == nil
       grabbed_movies = Movie.all
     else 
-      which_ratings.each do |key, val|
-        grabbed_movies.append(Movie.where(:rating=>key))
-      end
+      #which_ratings.each do |key, val|
+        #grabbed_movies.append(Movie.where(:rating=>key))
+      #end
+      grabbed_movies= Movie.all
     end
     return grabbed_movies 
 
