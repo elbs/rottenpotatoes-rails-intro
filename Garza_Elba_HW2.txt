@@ -1,0 +1,3 @@
+Github: https://github.com/elbs/rottenpotatoes-rails-intro
+
+Heroku: https://cryptic-scrubland-31817.herokuapp.com/
