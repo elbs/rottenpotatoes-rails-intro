@@ -10,31 +10,24 @@ class MoviesController < ApplicationController
     # "it expects the variable @all_ratings to be an enumerable collection
     @all_ratings = ['G', 'PG', 'PG-13', 'R']
 
-    @modhl = params[:mode]
-    which_ratings = params[:ratings]
+    which_sort = params[:mode] || session[:mode]
+    which_ratings = params[:ratings] || session[:ratings]
 
     # Make it all-inclusive for now, in case we don't filter 
     selected_movies = Movie.all
     @selected_ratings = @all_ratings
-
-    # grab modhl settings if saved in case
-    if session[:mode] != nil
-      @modhl = session[:mode]
-    end
+    @modhl = nil
 
     # If we have ratings selections, then we 
     # reduce based on selections
     if which_ratings != nil
       selected_movies = grab_rated_movies(which_ratings)
-      @selected_ratings = which_ratings 
-      session[:selected_ratings] = @selected_ratings
-    else # if nil, just make sure we haven't processed this before
-      if session[:selected_ratings] != nil
-        @selected_ratings = session[:selected_rating]
-        selected_movies = grab_rated_movies(@selected_ratings)
-      end
+      @selected_ratings = which_ratings
+      @modhl = which_sort
+      session[:ratings] = @selected_ratings
     end
-    @movies = msort(selected_movies)
+
+      @movies = msort(selected_movies)
   end
 
   def grab_rated_movies which_ratings
