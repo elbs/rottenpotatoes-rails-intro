@@ -19,12 +19,24 @@ class MoviesController < ApplicationController
 
     # Then reduce based on selections
     if which_ratings != nil
-      #selected_movies = grab_rated_movies(which_ratings)
+      selected_movies = grab_rated_movies(which_ratings)
       @selected_ratings = which_ratings 
     end
     @movies = msort(selected_movies)
   end
 
+  def grab_rated_movies which_ratings
+    grabbed_movies = Array.new
+    if which_ratings == nil
+      grabbed_movies = Movie.all
+    else 
+      which_ratings.each do |key, val|
+        grabbed_movies.append(Movie.where(:rating=>key))
+      end
+    end
+    return grabbed_movies 
+
+  end
 
   def new
     # default: render 'new' template
