@@ -13,14 +13,26 @@ class MoviesController < ApplicationController
     @modhl = params[:mode]
     which_ratings = params[:ratings]
 
-    # Make it all-inclusive for now 
+    # Make it all-inclusive for now, in case we don't filter 
     selected_movies = Movie.all
     @selected_ratings = @all_ratings
 
-    # Then reduce based on selections
+    # grab modhl settings if saved in case
+    if session[:mode] != nil
+      @modhl = session[:mode]
+    end
+
+    # If we have ratings selections, then we 
+    # reduce based on selections
     if which_ratings != nil
       selected_movies = grab_rated_movies(which_ratings)
       @selected_ratings = which_ratings 
+      session[:selected_ratings] = @selected_ratings
+    else # if nil, just make sure we haven't processed this before
+      if session[:selected_ratings] != nil
+        @selected_ratings = session[:selected_rating]
+        selected_movies = grab_rated_movies(@selected_ratings)
+      end
     end
     @movies = msort(selected_movies)
   end
@@ -33,7 +45,6 @@ class MoviesController < ApplicationController
         grabbed_movies = Movie.where(:rating=>which_ratings.keys)
     end
     return grabbed_movies 
-
   end
 
   def new
@@ -74,6 +85,7 @@ class MoviesController < ApplicationController
     else
       sorted = chosen_movies
     end
+    session[:sort] = @modehl
     return sorted
   end
 
