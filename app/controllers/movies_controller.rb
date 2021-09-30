@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
     @all_ratings = ['G', 'PG', 'PG-13', 'R']
 
     @modhl = params[:mode]
-    #which_ratings = params[:ratings]
+    which_ratings = params[:ratings]
 
     # Make it all-inclusive for now 
     selected_movies = Movie.all
